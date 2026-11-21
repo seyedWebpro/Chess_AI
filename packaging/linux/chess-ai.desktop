@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Chess AI Grandmaster
+Comment=Multi-Modal Chess AI System with Computer Vision and AR Overlay
+Exec=/opt/chessai/ChessAI
+Icon=/opt/chessai/extension/icons/icon128.png
+Terminal=false
+Type=Application
+Categories=Game;BoardGame;Science;ArtificialIntelligence;
+Keywords=chess;ai;stockfish;vision;

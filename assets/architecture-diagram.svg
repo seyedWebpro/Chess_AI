@@ -1,0 +1,240 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="archBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#070a12" />
+      <stop offset="50%" stop-color="#0b1120" />
+      <stop offset="100%" stop-color="#070c18" />
+    </linearGradient>
+
+    <!-- Layer Gradients -->
+    <linearGradient id="inputCard" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0284c7" stop-opacity="0.15" />
+      <stop offset="100%" stop-color="#0369a1" stop-opacity="0.05" />
+    </linearGradient>
+
+    <linearGradient id="perceptCard" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.15" />
+      <stop offset="100%" stop-color="#0891b2" stop-opacity="0.05" />
+    </linearGradient>
+
+    <linearGradient id="brainCard" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#8b5cf6" stop-opacity="0.18" />
+      <stop offset="100%" stop-color="#6d28d9" stop-opacity="0.06" />
+    </linearGradient>
+
+    <linearGradient id="execCard" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#10b981" stop-opacity="0.16" />
+      <stop offset="100%" stop-color="#059669" stop-opacity="0.05" />
+    </linearGradient>
+
+    <filter id="cardGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <marker id="arrowCyan" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M 0 0 L 8 4 L 0 8 Z" fill="#38bdf8" />
+    </marker>
+    <marker id="arrowPurple" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M 0 0 L 8 4 L 0 8 Z" fill="#c084fc" />
+    </marker>
+    <marker id="arrowGreen" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M 0 0 L 8 4 L 0 8 Z" fill="#34d399" />
+    </marker>
+  </defs>
+
+  <style>
+    .font-h1 { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-weight: 800; font-size: 20px; fill: #f8fafc; }
+    .font-col { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-weight: 700; font-size: 14px; }
+    .font-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; fill: #94a3b8; }
+    .font-title-node { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-weight: 600; font-size: 12px; fill: #ffffff; }
+    .font-desc-node { font-family: "SF Mono", Menlo, Consolas, monospace; font-size: 9.5px; fill: #cbd5e1; }
+    .font-tag { font-family: "SF Mono", Menlo, Consolas, monospace; font-size: 9px; font-weight: 600; }
+  </style>
+
+  <!-- Background -->
+  <rect width="1100" height="520" rx="16" fill="url(#archBg)" stroke="#1e293b" stroke-width="1.5" />
+
+  <!-- Top Title Header -->
+  <g transform="translate(35, 30)">
+    <circle cx="10" cy="10" r="4" fill="#38bdf8" />
+    <text x="24" y="16" class="font-h1">SYSTEM ARCHITECTURE &amp; DATA PIPELINE</text>
+    <text x="440" y="15" class="font-sub">High-Throughput Multi-Modal Processing from Pixels to Kinematic Actuation</text>
+  </g>
+
+  <!-- Column 1: Multi-Modal Inputs -->
+  <g transform="translate(35, 75)">
+    <!-- Column Frame -->
+    <rect width="235" height="415" rx="12" fill="url(#inputCard)" stroke="#0284c7" stroke-opacity="0.3" stroke-width="1" />
+    <text x="16" y="28" class="font-col" fill="#38bdf8">1. MULTI-MODAL INPUTS</text>
+    <text x="16" y="44" class="font-sub">Parallel Ingestion Feeds</text>
+
+    <!-- Node 1.1: Physical Webcam -->
+    <g transform="translate(14, 60)">
+      <rect width="207" height="95" rx="8" fill="#0f172a" stroke="#0ea5e9" stroke-opacity="0.3" stroke-width="1" />
+      <text x="12" y="22" class="font-title-node">📷 Physical Board (Webcam)</text>
+      <text x="12" y="42" class="font-desc-node">1280x720 HD Video Stream</text>
+      <text x="12" y="58" class="font-desc-node">ArUco 4-Corner Calibration</text>
+      <rect x="12" y="68" width="90" height="18" rx="4" fill="#0284c7" fill-opacity="0.2" />
+      <text x="18" y="81" class="font-tag" fill="#38bdf8">2.5 ms | 390 FPS</text>
+    </g>
+
+    <!-- Node 1.2: Digital Screen Capture -->
+    <g transform="translate(14, 175)">
+      <rect width="207" height="95" rx="8" fill="#0f172a" stroke="#0ea5e9" stroke-opacity="0.3" stroke-width="1" />
+      <text x="12" y="22" class="font-title-node">🖥️ Digital Monitor (mss)</text>
+      <text x="12" y="42" class="font-desc-node">Desktop Shared-Mem Buffer</text>
+      <text x="12" y="58" class="font-desc-node">Auto Contour Symmetry Finder</text>
+      <rect x="12" y="68" width="90" height="18" rx="4" fill="#0284c7" fill-opacity="0.2" />
+      <text x="18" y="81" class="font-tag" fill="#38bdf8">&lt; 2 ms Latency</text>
+    </g>
+
+    <!-- Node 1.3: DOM WebExtension Bridge -->
+    <g transform="translate(14, 290)">
+      <rect width="207" height="105" rx="8" fill="#0f172a" stroke="#0ea5e9" stroke-opacity="0.3" stroke-width="1" />
+      <text x="12" y="22" class="font-title-node">🌐 Chrome MV3 / Tampermonkey</text>
+      <text x="12" y="42" class="font-desc-node">DOM Mutation Observer</text>
+      <text x="12" y="58" class="font-desc-node">Local WebSocket (Port 8765)</text>
+      <rect x="12" y="74" width="105" height="18" rx="4" fill="#0284c7" fill-opacity="0.2" />
+      <text x="18" y="87" class="font-tag" fill="#38bdf8">Zero-Config Sync</text>
+    </g>
+  </g>
+
+  <!-- Connectors Col 1 -> Col 2 -->
+  <path d="M 270 182 L 305 182" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="3 3" marker-end="url(#arrowCyan)" />
+  <path d="M 270 297 L 305 297" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="3 3" marker-end="url(#arrowCyan)" />
+  <path d="M 270 412 L 305 412" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="3 3" marker-end="url(#arrowCyan)" />
+
+  <!-- Column 2: Perception & Validation -->
+  <g transform="translate(305, 75)">
+    <!-- Column Frame -->
+    <rect width="235" height="415" rx="12" fill="url(#perceptCard)" stroke="#06b6d4" stroke-opacity="0.3" stroke-width="1" />
+    <text x="16" y="28" class="font-col" fill="#06b6d4">2. PERCEPTION &amp; ROUTING</text>
+    <text x="16" y="44" class="font-sub">Noise Filtering &amp; FSM State</text>
+
+    <!-- Node 2.1: Physical CV Pipeline -->
+    <g transform="translate(14, 60)">
+      <rect width="207" height="95" rx="8" fill="#0f172a" stroke="#06b6d4" stroke-opacity="0.3" stroke-width="1" />
+      <text x="12" y="22" class="font-title-node">🔍 Anti-Shadow Vision Filter</text>
+      <text x="12" y="42" class="font-desc-node">SSIM + LAB Color Contrast</text>
+      <text x="12" y="58" class="font-desc-node">MediaPipe Hand Occlusion Lock</text>
+      <rect x="12" y="68" width="90" height="18" rx="4" fill="#06b6d4" fill-opacity="0.2" />
+      <text x="18" y="81" class="font-tag" fill="#22d3ee">5.8 ms Frame</text>
+    </g>
+
+    <!-- Node 2.2: Ultra Screen CV -->
+    <g transform="translate(14, 175)">
+      <rect width="207" height="95" rx="8" fill="#0f172a" stroke="#06b6d4" stroke-opacity="0.3" stroke-width="1" />
+      <text x="12" y="22" class="font-title-node">⚡ Delta-BGR Move Detector</text>
+      <text x="12" y="42" class="font-desc-node">256-Square Vectorized Diff</text>
+      <text x="12" y="58" class="font-desc-node">Euclidean Distance Matrix</text>
+      <rect x="12" y="68" width="110" height="18" rx="4" fill="#06b6d4" fill-opacity="0.2" />
+      <text x="18" y="81" class="font-tag" fill="#22d3ee">0.43 ms (2290 FPS)</text>
+    </g>
+
+    <!-- Node 2.3: Dual Input Router & FSM -->
+    <g transform="translate(14, 290)">
+      <rect width="207" height="105" rx="8" fill="#0f172a" stroke="#06b6d4" stroke-opacity="0.3" stroke-width="1" />
+      <text x="12" y="22" class="font-title-node">🔀 Input Router &amp; python-chess</text>
+      <text x="12" y="42" class="font-desc-node">Instant Hot-Swap Failover</text>
+      <text x="12" y="58" class="font-desc-node">Legal Move Rule Enforcement</text>
+      <rect x="12" y="74" width="105" height="18" rx="4" fill="#06b6d4" fill-opacity="0.2" />
+      <text x="18" y="87" class="font-tag" fill="#22d3ee">Zero-Drop State</text>
+    </g>
+  </g>
+
+  <!-- Connectors Col 2 -> Col 3 -->
+  <path d="M 540 297 L 575 297" stroke="#a855f7" stroke-width="1.5" marker-end="url(#arrowPurple)" />
+
+  <!-- Column 3: Dual-Brain Engine -->
+  <g transform="translate(575, 75)">
+    <!-- Column Frame -->
+    <rect width="235" height="415" rx="12" fill="url(#brainCard)" stroke="#8b5cf6" stroke-opacity="0.3" stroke-width="1" />
+    <text x="16" y="28" class="font-col" fill="#c084fc">3. HYBRID AI COGNITION</text>
+    <text x="16" y="44" class="font-sub">Opening, Engine &amp; Psychology</text>
+
+    <!-- Node 3.1: Polyglot Opening -->
+    <g transform="translate(14, 60)">
+      <rect width="207" height="75" rx="8" fill="#0f172a" stroke="#8b5cf6" stroke-opacity="0.3" stroke-width="1" />
+      <text x="12" y="22" class="font-title-node">📖 Polyglot Opening (.bin)</text>
+      <text x="12" y="40" class="font-desc-node">Standard Grandmaster Lines</text>
+      <rect x="12" y="48" width="95" height="18" rx="4" fill="#8b5cf6" fill-opacity="0.2" />
+      <text x="18" y="61" class="font-tag" fill="#d8b4fe">0.05 ms Look-Up</text>
+    </g>
+
+    <!-- Node 3.2: Stockfish 19 NNUE -->
+    <g transform="translate(14, 145)">
+      <rect width="207" height="85" rx="8" fill="#0f172a" stroke="#8b5cf6" stroke-opacity="0.3" stroke-width="1" />
+      <text x="12" y="22" class="font-title-node">⚡ Stockfish 19 NNUE</text>
+      <text x="12" y="40" class="font-desc-node">Multi-PV, Hash LRU Cache</text>
+      <rect x="12" y="55" width="115" height="18" rx="4" fill="#8b5cf6" fill-opacity="0.2" />
+      <text x="18" y="68" class="font-tag" fill="#d8b4fe">God Mode (3600+)</text>
+    </g>
+
+    <!-- Node 3.3: Maia Chess Neural Net -->
+    <g transform="translate(14, 240)">
+      <rect width="207" height="85" rx="8" fill="#0f172a" stroke="#8b5cf6" stroke-opacity="0.3" stroke-width="1" />
+      <text x="12" y="22" class="font-title-node">🧠 Maia Chess (ONNX)</text>
+      <text x="12" y="40" class="font-desc-node">Human Elo 1100, 1500, 1900</text>
+      <rect x="12" y="55" width="110" height="18" rx="4" fill="#8b5cf6" fill-opacity="0.2" />
+      <text x="18" y="68" class="font-tag" fill="#d8b4fe">Human Psychology</text>
+    </g>
+
+    <!-- Node 3.4: Concept Coach -->
+    <g transform="translate(14, 335)">
+      <rect width="207" height="65" rx="8" fill="#0f172a" stroke="#8b5cf6" stroke-opacity="0.3" stroke-width="1" />
+      <text x="12" y="20" class="font-title-node">🎓 Pedagogical Coach</text>
+      <text x="12" y="38" class="font-desc-node">Pins, Forks, Skewers &amp; Motifs</text>
+      <text x="12" y="52" class="font-tag" fill="#c084fc">&lt; 0.5 ms Tactical Eval</text>
+    </g>
+  </g>
+
+  <!-- Connectors Col 3 -> Col 4 -->
+  <path d="M 810 215 L 845 215" stroke="#10b981" stroke-width="1.5" marker-end="url(#arrowGreen)" />
+  <path d="M 810 330 L 845 330" stroke="#10b981" stroke-width="1.5" marker-end="url(#arrowGreen)" />
+
+  <!-- Column 4: Execution & Actuation -->
+  <g transform="translate(845, 75)">
+    <!-- Column Frame -->
+    <rect width="220" height="415" rx="12" fill="url(#execCard)" stroke="#10b981" stroke-opacity="0.3" stroke-width="1" />
+    <text x="16" y="28" class="font-col" fill="#34d399">4. EXECUTION &amp; ACTUATION</text>
+    <text x="16" y="44" class="font-sub">Visual, Audio &amp; Physical</text>
+
+    <!-- Node 4.1: AR Video & Click-Through HUD -->
+    <g transform="translate(12, 60)">
+      <rect width="196" height="85" rx="8" fill="#0f172a" stroke="#10b981" stroke-opacity="0.3" stroke-width="1" />
+      <text x="10" y="22" class="font-title-node">🔮 AR HUD &amp; Transparent GUI</text>
+      <text x="10" y="40" class="font-desc-node">Neon Arrow ROI Blending</text>
+      <text x="10" y="54" class="font-desc-node">PyQt6 Click-Through</text>
+      <rect x="10" y="60" width="100" height="18" rx="4" fill="#10b981" fill-opacity="0.2" />
+      <text x="15" y="73" class="font-tag" fill="#34d399">270 FPS Overlay</text>
+    </g>
+
+    <!-- Node 4.2: Audio Feedback -->
+    <g transform="translate(12, 155)">
+      <rect width="196" height="85" rx="8" fill="#0f172a" stroke="#10b981" stroke-opacity="0.3" stroke-width="1" />
+      <text x="10" y="22" class="font-title-node">🔊 Voice &amp; Stealth Earcon</text>
+      <text x="10" y="40" class="font-desc-node">Edge Neural TTS (Farsi)</text>
+      <text x="10" y="54" class="font-desc-node">Pure PCM Stealth Clicks</text>
+      <rect x="10" y="60" width="95" height="18" rx="4" fill="#10b981" fill-opacity="0.2" />
+      <text x="15" y="73" class="font-tag" fill="#34d399">0.08 ms Cache</text>
+    </g>
+
+    <!-- Node 4.3: WindMouse Biomechanical -->
+    <g transform="translate(12, 250)">
+      <rect width="196" height="145" rx="8" fill="#0f172a" stroke="#10b981" stroke-opacity="0.3" stroke-width="1" />
+      <text x="10" y="22" class="font-title-node">🖱️ Biomechanical WindMouse</text>
+      <text x="10" y="40" class="font-desc-node">Flash &amp; Hogan Min-Jerk</text>
+      <text x="10" y="54" class="font-desc-node">Overshoot &amp; Hand Tremors</text>
+      <text x="10" y="68" class="font-desc-node">Log-Normal Thinking Time</text>
+      <text x="10" y="82" class="font-desc-node">macOS CoreGraphics / Win32</text>
+      <rect x="10" y="94" width="110" height="20" rx="4" fill="#10b981" fill-opacity="0.2" />
+      <text x="15" y="108" class="font-tag" fill="#34d399">Anti-Cheat Evasion</text>
+      <rect x="10" y="118" width="90" height="18" rx="4" fill="#10b981" fill-opacity="0.1" />
+      <text x="15" y="131" class="font-tag" fill="#6ee7b7">Curvature R≈0.95</text>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,38 @@
+# Chess AI - Complete 10-Phase Production Requirements
+# ====================================================
+
+# Phase 1: Core Engine, Rules & Multi-PV
+python-chess>=1.9.4
+numpy>=1.22.0
+loguru>=0.7.2
+
+# Phase 2 & 4: Computer Vision, ArUco Calibration & AR Overlays
+opencv-python>=4.8.0
+scikit-image>=0.21.0
+
+# Phase 3: Physical Move & Hand Tracking
+mediapipe>=0.10.9
+
+# Phase 5: Persian Neural Voice Assistant
+edge-tts>=6.1.9
+
+# Phase 6: Ultra-Fast Screen Capture & CV Localization
+mss>=9.0.1
+
+# Phase 7: DOM Bridge & Local WebSocket Server
+websockets>=13.0
+
+# Phase 8 & 10: GUI, Transparent AR Overlay & Master Dashboard
+PyQt6>=6.6.0
+
+# Phase 9: Biomechanical WindMouse & Anti-Cheat Telemetry
+scipy>=1.13.0
+
+# Phase 10: Neural Network Inference (Maia Chess)
+onnxruntime>=1.19.0
+
+# Testing, Verification & Playwright Browser E2E
+pytest>=8.0.0
+pytest-asyncio>=0.23.0
+playwright>=1.42.0
+matplotlib>=3.8.0

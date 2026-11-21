@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 160" width="100%" height="100%">
+  <defs>
+    <linearGradient id="benchBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0f1d" />
+      <stop offset="100%" stop-color="#060913" />
+    </linearGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.06" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.02" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <style>
+    .val { font-family: "SF Mono", Menlo, Consolas, monospace; font-size: 26px; font-weight: 800; }
+    .unit { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; font-weight: 700; }
+    .lbl { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11.5px; fill: #94a3b8; font-weight: 500; }
+    .sub { font-family: "SF Mono", Menlo, Consolas, monospace; font-size: 10px; fill: #64748b; }
+  </style>
+
+  <!-- Container -->
+  <rect width="1100" height="160" rx="16" fill="url(#benchBg)" stroke="#1e293b" stroke-width="1.5" />
+
+  <!-- Metric 1: Delta-BGR Screen CV -->
+  <g transform="translate(20, 20)">
+    <rect width="165" height="120" rx="10" fill="url(#cardGrad)" stroke="#06b6d4" stroke-opacity="0.3" stroke-width="1" />
+    <text x="16" y="44" class="val" fill="#22d3ee" filter="url(#glow)">0.43</text>
+    <text x="82" y="44" class="unit" fill="#67e8f9">ms</text>
+    <text x="16" y="68" class="lbl">Move Detection</text>
+    <text x="16" y="94" class="sub">2,290 FPS (Screen)</text>
+  </g>
+
+  <!-- Metric 2: Opening Book -->
+  <g transform="translate(200, 20)">
+    <rect width="165" height="120" rx="10" fill="url(#cardGrad)" stroke="#8b5cf6" stroke-opacity="0.3" stroke-width="1" />
+    <text x="16" y="44" class="val" fill="#c084fc" filter="url(#glow)">0.05</text>
+    <text x="82" y="44" class="unit" fill="#e9d5ff">ms</text>
+    <text x="16" y="68" class="lbl">Opening Retrieval</text>
+    <text x="16" y="94" class="sub">Polyglot Binary</text>
+  </g>
+
+  <!-- Metric 3: AR HUD Frame -->
+  <g transform="translate(380, 20)">
+    <rect width="165" height="120" rx="10" fill="url(#cardGrad)" stroke="#10b981" stroke-opacity="0.3" stroke-width="1" />
+    <text x="16" y="44" class="val" fill="#34d399" filter="url(#glow)">1.19</text>
+    <text x="76" y="44" class="unit" fill="#a7f3d0">ms</text>
+    <text x="16" y="68" class="lbl">AR Glow Rendering</text>
+    <text x="16" y="94" class="sub">835 FPS Blending</text>
+  </g>
+
+  <!-- Metric 4: Transparent Desktop Overlay -->
+  <g transform="translate(560, 20)">
+    <rect width="165" height="120" rx="10" fill="url(#cardGrad)" stroke="#f59e0b" stroke-opacity="0.3" stroke-width="1" />
+    <text x="16" y="44" class="val" fill="#fbbf24" filter="url(#glow)">270</text>
+    <text x="72" y="44" class="unit" fill="#fde68a">FPS</text>
+    <text x="16" y="68" class="lbl">PyQt6 Click-Through</text>
+    <text x="16" y="94" class="sub">Zero Event Block</text>
+  </g>
+
+  <!-- Metric 5: Human Kinematics Curvature -->
+  <g transform="translate(740, 20)">
+    <rect width="165" height="120" rx="10" fill="url(#cardGrad)" stroke="#ec4899" stroke-opacity="0.3" stroke-width="1" />
+    <text x="16" y="44" class="val" fill="#f472b6" filter="url(#glow)">~0.95</text>
+    <text x="86" y="44" class="unit" fill="#fbcfe8">R</text>
+    <text x="16" y="68" class="lbl">Human Curvature</text>
+    <text x="16" y="94" class="sub">WindMouse Physics</text>
+  </g>
+
+  <!-- Metric 6: Test Suite -->
+  <g transform="translate(920, 20)">
+    <rect width="160" height="120" rx="10" fill="url(#cardGrad)" stroke="#22c55e" stroke-opacity="0.4" stroke-width="1" />
+    <text x="16" y="44" class="val" fill="#4ade80" filter="url(#glow)">100%</text>
+    <text x="86" y="44" class="unit" fill="#bbf7d0">PASS</text>
+    <text x="16" y="68" class="lbl">Quality Assurance</text>
+    <text x="16" y="94" class="sub">110/110 Tests Green</text>
+  </g>
+</svg>
