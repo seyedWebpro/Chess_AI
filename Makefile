@@ -6,7 +6,7 @@ PYTEST := .venv/bin/pytest
 help:
 	@echo "Available commands for Chess AI:"
 	@echo "  make setup       Install virtualenv and all dependencies"
-	@echo "  make test        Run complete 125-test automated pyramid"
+	@echo "  make test        Run complete 129-test automated pyramid"
 	@echo "  make test-e2e    Run Playwright headless Chromium E2E tests"
 	@echo "  make benchmark   Run Maia ONNX vs Stockfish & ACL Governor benchmarks"
 	@echo "  make gui         Launch PyQt6 Master Graphical Dashboard"

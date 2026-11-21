@@ -152,14 +152,20 @@ class ACLGovernor:
             # Need to increase ACPL with a SAFE inaccuracy
             max_safe = self.profile["max_safe_loss"]
 
+            # If position advantage is narrow (< +100 cp), strictly cap inaccuracy to prevent losing equality
+            effective_max_safe = max_safe
+            if active_eval_pov is not None and active_eval_pov < 100:
+                effective_max_safe = min(max_safe, 25.0)
+
             safe_candidates = [
                 c for c in candidates[1:]
-                if 10.0 <= c["loss_cp"] <= max_safe and not c.get("is_mate", False)
+                if 6.0 <= c["loss_cp"] <= effective_max_safe and not c.get("is_mate", False)
             ]
 
             if safe_candidates:
-                # Pick the safe sub-optimal candidate closest to the required target gap
-                chosen = safe_candidates[0]
+                # Pick the candidate closest to the required target deficit
+                target_deficit = max(10.0, self.profile["target_acpl"] - self.current_acpl)
+                chosen = min(safe_candidates, key=lambda c: abs(c["loss_cp"] - target_deficit))
                 governed_action = f"INJECT_SAFE_INACCURACY (+{chosen['loss_cp']:.1f}cp)"
             else:
                 chosen = best_cand

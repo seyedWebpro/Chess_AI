@@ -6,7 +6,7 @@
 ### Autonomous Multi-Modal Intelligence, Real-Time Vision & Biomechanical Automation
 
 [![CI & QA](https://github.com/seyedWebpro/Chess_AI/actions/workflows/ci.yml/badge.svg)](https://github.com/seyedWebpro/Chess_AI/actions/workflows/ci.yml)
-[![Tests](https://img.shields.io/badge/Tests-125%20Passing%20(100%25)-10b981?logo=pytest&logoColor=white)](tests/)
+[![Tests](https://img.shields.io/badge/Tests-129%20Passing%20(100%25)-10b981?logo=pytest&logoColor=white)](tests/)
 [![Python](https://img.shields.io/badge/Python-3.9%20%7C%203.10%20%7C%203.11-38bdf8?logo=python&logoColor=white)](https://www.python.org/)
 [![Stockfish 19](https://img.shields.io/badge/Stockfish-19%20NNUE%20(3600+%20Elo)-22c55e?logo=lichess&logoColor=white)](https://stockfishchess.org/)
 [![Maia Chess](https://img.shields.io/badge/Maia%20Net-ONNX%20Personas-a855f7)](https://maiachess.com/)
@@ -35,6 +35,14 @@
 
 > [!TIP]
 > **Zero-Lag Architecture:** Chess AI executes screen move detection in **0.43 ms (2,290 FPS)**, delivers native Maia ONNX predictions in **1.41 ms**, and projects transparent HUD overlays at **270 FPS** without intercepting mouse clicks (`WA_TransparentForMouseEvents`).
+
+> [!IMPORTANT]
+> ### 🛡️ Ethical Use & Academic Research Notice
+> **Chess AI** is developed and distributed solely for **educational, academic, and scientific research purposes** exploring multi-modal computer vision, augmented reality interfaces, neural evaluation networks, and human biomechanical motor modeling.
+>
+> - **Platform Terms of Service:** Users must respect the Fair Play and Terms of Service policies of all online chess platforms (including Chess.com and Lichess). Using automated assistance against human players without mutual agreement violates platform rules and can result in account sanctions.
+> - **Recommended Testing:** To evaluate this software safely, use physical chessboards via webcam, local simulations (`main.py --arena`), unrated games against built-in engine bots, or authorized bot APIs (such as the Lichess Bot API).
+> - **Disclaimer:** The creator and contributors assume no liability for misuse, account penalties, or actions taken by third-party platforms.
 
 ---
 
@@ -269,10 +277,10 @@ open web_preview.html  # Linux: xdg-open web_preview.html
 
 ## 🧪 Test Suite
 
-The repository incorporates a comprehensive testing pyramid comprising **125 automated tests** spanning unit, integration, synthetic video replay, and headless browser E2E audits:
+The repository incorporates a comprehensive testing pyramid comprising **129 automated tests** spanning unit, integration, synthetic video replay, and headless browser E2E audits:
 
 ```bash
-# Run all 125 tests
+# Run all 129 tests
 pytest tests/ -v
 
 # Run browser E2E test suite (Playwright Chromium)
@@ -283,8 +291,8 @@ pytest tests/test_automation.py tests/test_acl_governor.py -v
 ```
 
 **Quality Assurance Metrics:**
-- **Total Tests:** 125
-- **Passed:** 125 (100% Green)
+- **Total Tests:** 129
+- **Passed:** 129 (100% Green)
 - **Zero Memory Leaks & Zero Flaky Tests**
 
 ---

@@ -27,45 +27,54 @@ def encode_board_112_planes(board: chess.Board) -> np.ndarray:
     """
     Encodes a python-chess Board into the canonical Leela Chess Zero (Lc0)
     112-plane tensor of shape (1, 112, 8, 8) with dtype float32,
-    oriented from the active player's perspective.
+    oriented from the active player's perspective, including position history.
     """
     planes = np.zeros((1, 112, 8, 8), dtype=np.float32)
     turn = board.turn
 
-    # 1. Current Pieces (Planes 0 to 11)
-    for sq in chess.SQUARES:
-        piece = board.piece_at(sq)
-        if piece is None:
-            continue
-        p_type = piece.piece_type
-        p_color = piece.color
+    # 1. Historical Piece Planes (8 time steps x 13 planes = 104 planes)
+    curr_board = board.copy()
+    for step in range(8):
+        base = step * 13
+        for sq in chess.SQUARES:
+            piece = curr_board.piece_at(sq)
+            if piece is None:
+                continue
+            r = chess.square_rank(sq) if turn == chess.WHITE else 7 - chess.square_rank(sq)
+            c = chess.square_file(sq)
+            plane_idx = base + PIECE_ORDER.index(piece.piece_type)
+            if piece.color != turn:
+                plane_idx += 6
+            planes[0, plane_idx, r, c] = 1.0
 
-        # Orient square so active player is at the bottom (rank 0-7)
-        r = chess.square_rank(sq) if turn == chess.WHITE else 7 - chess.square_rank(sq)
-        c = chess.square_file(sq)
+        if not curr_board.move_stack:
+            break
+        curr_board.pop()
 
-        plane_idx = PIECE_ORDER.index(p_type)
-        if p_color != turn:
-            plane_idx += 6  # Opponent planes
-
-        planes[0, plane_idx, r, c] = 1.0
-
-    # 2. Castling Rights (Planes 104 to 107)
+    # 2. Auxiliary Planes (Planes 104 to 111)
+    # Castling Rights:
+    # 104: our queenside, 105: our kingside, 106: opp queenside, 107: opp kingside
     if turn == chess.WHITE:
-        if board.has_kingside_castling_rights(chess.WHITE): planes[0, 104, :, :] = 1.0
-        if board.has_queenside_castling_rights(chess.WHITE): planes[0, 105, :, :] = 1.0
-        if board.has_kingside_castling_rights(chess.BLACK): planes[0, 106, :, :] = 1.0
-        if board.has_queenside_castling_rights(chess.BLACK): planes[0, 107, :, :] = 1.0
+        if board.has_queenside_castling_rights(chess.WHITE): planes[0, 104, :, :] = 1.0
+        if board.has_kingside_castling_rights(chess.WHITE): planes[0, 105, :, :] = 1.0
+        if board.has_queenside_castling_rights(chess.BLACK): planes[0, 106, :, :] = 1.0
+        if board.has_kingside_castling_rights(chess.BLACK): planes[0, 107, :, :] = 1.0
     else:
-        if board.has_kingside_castling_rights(chess.BLACK): planes[0, 104, :, :] = 1.0
-        if board.has_queenside_castling_rights(chess.BLACK): planes[0, 105, :, :] = 1.0
-        if board.has_kingside_castling_rights(chess.WHITE): planes[0, 106, :, :] = 1.0
-        if board.has_queenside_castling_rights(chess.WHITE): planes[0, 107, :, :] = 1.0
+        if board.has_queenside_castling_rights(chess.BLACK): planes[0, 104, :, :] = 1.0
+        if board.has_kingside_castling_rights(chess.BLACK): planes[0, 105, :, :] = 1.0
+        if board.has_queenside_castling_rights(chess.WHITE): planes[0, 106, :, :] = 1.0
+        if board.has_kingside_castling_rights(chess.WHITE): planes[0, 107, :, :] = 1.0
 
-    # 3. Rule-50 and Move Clock
+    # 108: En-passant square
+    if board.ep_square is not None:
+        ep_r = chess.square_rank(board.ep_square) if turn == chess.WHITE else 7 - chess.square_rank(board.ep_square)
+        ep_c = chess.square_file(board.ep_square)
+        planes[0, 108, ep_r, ep_c] = 1.0
+
+    # 109: Rule-50 counter
     planes[0, 109, :, :] = float(board.halfmove_clock) / 100.0
 
-    # 4. Constant Plane of 1s (Plane 111)
+    # 111: Constant Plane of 1s
     planes[0, 111, :, :] = 1.0
 
     return planes

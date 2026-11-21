@@ -78,6 +78,6 @@
     <text x="16" y="44" class="val" fill="#4ade80" filter="url(#glow)">100%</text>
     <text x="86" y="44" class="unit" fill="#bbf7d0">PASS</text>
     <text x="16" y="68" class="lbl">Quality Assurance</text>
-    <text x="16" y="94" class="sub">125/125 Tests Green</text>
+    <text x="16" y="94" class="sub">129/129 Tests Green</text>
   </g>
 </svg>

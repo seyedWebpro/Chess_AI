@@ -87,6 +87,8 @@ class DOMBridgeServer:
                     if state:
                         self.latest_state = state
                         self._board_history.append(state)
+                        if len(self._board_history) > 1000:
+                            self._board_history.pop(0)
                         if self.on_update_callback:
                             try:
                                 self.on_update_callback(state)

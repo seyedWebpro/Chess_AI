@@ -186,7 +186,13 @@ class StealthAudioController:
 
         def _play():
             try:
-                if sys.platform == "darwin" and os.path.exists("/usr/bin/afplay"):
+                if sys.platform == "win32":
+                    try:
+                        import winsound
+                        winsound.PlaySound(str(file_path), winsound.SND_FILENAME)
+                    except Exception as win_err:
+                        logger.debug(f"Windows audio play: {win_err}")
+                elif sys.platform == "darwin" and os.path.exists("/usr/bin/afplay"):
                     proc = subprocess.Popen(
                         ["/usr/bin/afplay", str(file_path)],
                         stdout=subprocess.DEVNULL,

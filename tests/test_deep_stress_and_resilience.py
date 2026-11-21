@@ -155,3 +155,81 @@ class TestLiveGameSimulationE2E:
             # Check ACL Governor cumulative statistics
             acpl = brain.acl_governor.current_acpl
             assert 0.0 <= acpl <= 100.0, f"Final match ACPL {acpl} cp must be within safe human bounds"
+
+    def test_07_112_planes_historical_multistep_encoding(self):
+        """Verifies that 112-plane encoder correctly populates historical board states backwards."""
+        from core.maia_onnx import encode_board_112_planes
+        import numpy as np
+
+        board = chess.Board()
+        moves = ["e2e4", "e7e5", "g1f3", "b8c6", "f1b5", "a7a6", "b5c6", "d7c6"]
+        for m in moves:
+            board.push_uci(m)
+
+        planes = encode_board_112_planes(board)
+        assert planes.shape == (1, 112, 8, 8)
+        # Check non-zero historical planes (must encode current + past 7 moves)
+        active_planes = np.count_nonzero(planes.sum(axis=(2, 3)))
+        assert active_planes >= 50, f"Expected at least 50 active planes with 8 plies of history, got {active_planes}"
+
+        # Auxiliary planes
+        assert planes[0, 111, 0, 0] == 1.0  # Constant plane 1s
+        assert planes[0, 109, 0, 0] >= 0.0  # Rule-50 plane
+
+    def test_08_en_passant_plane_108_and_tactical_inference(self):
+        """Verifies that en-passant square is encoded on Plane 108 and recognized by Maia."""
+        from core.maia_onnx import MaiaOnnxEngine, encode_board_112_planes
+        engine = MaiaOnnxEngine(elo=1900)
+
+        # White pawn on e5, Black plays d7d5 -> en passant available on d6
+        board = chess.Board()
+        board.push_san("e4")
+        board.push_san("a6")
+        board.push_san("e5")
+        board.push_san("d5")  # Black offers en passant
+
+        assert board.ep_square == chess.D6
+        planes = encode_board_112_planes(board)
+        # In White perspective, D6 is rank 5, file 3
+        assert planes[0, 108, 5, 3] == 1.0, "Plane 108 must mark en-passant square d6"
+
+        res = engine.predict(board, top_k=10)
+        legal_ucis = [c["uci"] for c in res["candidates"]]
+        assert "e5d6" in legal_ucis, "En-passant move e5d6 must be evaluated as legal candidate"
+
+    def test_09_acl_governor_tight_margin_protection(self):
+        """Verifies that in narrow advantages (< +100 cp), the governor caps inaccuracies to avoid losing equality."""
+        gov = ACLGovernor(target_elo=1500)
+        gov.total_loss_cp = 0.0
+        gov.move_count = 10  # TOO_PRECISE
+
+        board = chess.Board()
+        # White has only +30 cp advantage
+        candidates = [
+            {"move_uci": "e2e4", "score_cp": 30, "is_mate": False},
+            {"move_uci": "d2d4", "score_cp": 18, "is_mate": False},   # 12 cp loss (safe)
+            {"move_uci": "g1f3", "score_cp": -20, "is_mate": False},  # 50 cp loss (would make White lose equality!)
+        ]
+
+        decision = gov.govern_candidates(board, candidates, current_eval_cp=30)
+        # Should choose d2d4 (+12 cp loss), but NEVER g1f3 which exceeds the 25 cp tight margin cap
+        assert decision["chosen_move"].uci() == "d2d4"
+        assert decision["loss_incurred"] <= 25.0
+
+    def test_10_krk_endgame_technique_and_mate_progression(self):
+        """Verifies that in King + Rook vs King, Tactical Emergency & God Mode deliver checkmate in 1."""
+        # 1. With ACL Governor tactical emergency override enabled
+        with HybridBrain(persona=Persona.MAIA_1900, use_opening_book=False, use_acl_governor=True) as brain:
+            # White: Kg6, Ra7. Black: Kh8. Ra8# is checkmate in 1
+            krk_mate_in_1 = chess.Board("7k/R7/6K1/8/8/8/8/8 w - - 0 1")
+            decision = brain.decide_move(krk_mate_in_1, time_limit=0.08)
+
+            assert decision["move"] == chess.Move.from_uci("a7a8")
+            krk_mate_in_1.push(decision["move"])
+            assert krk_mate_in_1.is_checkmate(), "Move a7a8 must be absolute checkmate"
+
+        # 2. In God Mode
+        with HybridBrain(persona=Persona.GOD_MODE, use_opening_book=False, use_acl_governor=False) as brain_god:
+            board_god = chess.Board("7k/R7/6K1/8/8/8/8/8 w - - 0 1")
+            decision_god = brain_god.decide_move(board_god, time_limit=0.08)
+            assert decision_god["move"] == chess.Move.from_uci("a7a8")

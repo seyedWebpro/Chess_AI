@@ -10,7 +10,7 @@
 ![Platform](https://img.shields.io/badge/Platform-macOS%20%7C%20Linux%20%7C%20Windows-black)
 ![Stockfish](https://img.shields.io/badge/Engine-Stockfish%2019%20NNUE%20(Elo%203600%2B)-green?logo=lichess)
 ![Maia](https://img.shields.io/badge/Neural%20Network-Maia%20Chess%20(ONNX)-purple)
-![Tests](https://img.shields.io/badge/Tests-125%20Passing%20(100%25)-success?logo=pytest)
+![Tests](https://img.shields.io/badge/Tests-129%20Passing%20(100%25)-success?logo=pytest)
 ![Maia ONNX](https://img.shields.io/badge/Maia%20ONNX-1.41ms%20(24.7x%20Faster)-purple)
 ![Anti-Cheat](https://img.shields.io/badge/Anti--Cheat-ACL%20Governed-orange)
 ![Extension](https://img.shields.io/badge/Chrome%20Extension-Manifest%20V3-blue?logo=googlechrome)
@@ -18,6 +18,14 @@
 **[English (راهنمای جامع انگلیسی)](README.md)** • **فارسی**
 
 </div>
+
+> [!IMPORTANT]
+> ### 🛡️ بیانیه استفاده اخلاقی، علمی و سلب مسئولیت
+> این پروژه صرفاً برای **اهداف آموزشی، پژوهشی و تحقیقات علمی** در حوزه‌های بینایی ماشین، واقعیت افزوده (AR)، شبکه‌های عصبی و بیومکانیک حرکتی دست توسعه یافته است.
+>
+> - **قوانین پلتفرم‌های آنلاین:** کاربران موظف به رعایت قوانین بازی منصفانه (Fair Play) پلتفرم‌ها (نظیر Chess.com و Lichess) هستند. استفاده از ربات یا دستیار موتوری علیه بازیکنان انسانی خلاف قوانین پلتفرم‌ها بوده و ممکن است منجر به مسدودسازی حساب کاربری شود.
+> - **محیط‌های پیشنهادی تست:** بازی روی صفحه فیزیکی واقعی با وب‌کم، شبیه‌سازی محلی خودکار (`main.py --arena`)، بازی آفلاین یا رقابت با بات‌های رسمی پلتفرم‌ها.
+> - **سلب مسئولیت:** سازنده و مشارکت‌کنندگان هیچ‌گونه مسئولیتی در قبال هرگونه سوءاستفاده یا مسدود شدن حساب‌های کاربری بر عهده ندارند.
 
 ---
 
