@@ -2,7 +2,7 @@
 # ====================================================
 
 # Phase 1: Core Engine, Rules & Multi-PV
-python-chess>=1.9.4
+python-chess>=1.999
 numpy>=1.22.0
 loguru>=0.7.2
 
