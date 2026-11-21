@@ -26,7 +26,7 @@ websockets>=13.0
 PyQt6>=6.6.0
 
 # Phase 9: Biomechanical WindMouse & Anti-Cheat Telemetry
-scipy>=1.13.0
+scipy>=1.18.1
 
 # Phase 10: Neural Network Inference (Maia Chess)
 onnxruntime>=1.19.0
