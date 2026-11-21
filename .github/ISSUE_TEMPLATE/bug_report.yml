@@ -1,0 +1,60 @@
+name: 🐛 Bug Report
+description: Create a report to help us improve Chess AI
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report!
+  - type: input
+    id: os
+    attributes:
+      label: Operating System & Hardware
+      description: e.g. macOS 15.1 (Apple Silicon / Intel), Ubuntu 22.04, Windows 11
+      placeholder: macOS 15 (Apple Silicon M-series)
+    validations:
+      required: true
+  - type: input
+    id: python-version
+    attributes:
+      label: Python Version
+      placeholder: e.g. 3.10.12
+    validations:
+      required: true
+  - type: dropdown
+    id: component
+    attributes:
+      label: Affected Component
+      options:
+        - "Physical Vision (OpenCV / ArUco / Webcam)"
+        - "Screen Computer Vision (mss / Delta-BGR)"
+        - "DOM Bridge & Chrome MV3 Extension"
+        - "Engine & Cognition (Stockfish 19 / Maia ONNX / ACL Governor)"
+        - "Biomechanical Automation (WindMouse / Anti-Cheat)"
+        - "UI / AR HUD / PyQt6 Overlay"
+        - "Other"
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: Clear and concise description of what the bug is.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      description: What commands or GUI actions trigger this issue?
+      placeholder: |
+        1. Run 'python main.py --gui'
+        2. Select 'Maia 1500' persona
+        3. ...
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Terminal Logs / Stacktrace
+      render: shell

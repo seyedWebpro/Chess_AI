@@ -1,0 +1,27 @@
+name: 💡 Feature Request
+description: Suggest an idea or enhancement for Chess AI
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        We appreciate community ideas to make Chess AI faster, more realistic, and more versatile!
+  - type: textarea
+    id: problem
+    attributes:
+      label: Is your feature request related to a problem?
+      description: A clear description of what the current limitation is.
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: Describe the Solution You'd Like
+      description: Detailed breakdown of the proposed architecture, module, or algorithm.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Describe Alternatives You've Considered
+      description: Any alternative solutions or workarounds you have evaluated.

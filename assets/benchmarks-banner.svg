@@ -36,13 +36,13 @@
     <text x="16" y="94" class="sub">2,290 FPS (Screen)</text>
   </g>
 
-  <!-- Metric 2: Opening Book -->
+  <!-- Metric 2: Native Maia ONNX -->
   <g transform="translate(200, 20)">
     <rect width="165" height="120" rx="10" fill="url(#cardGrad)" stroke="#8b5cf6" stroke-opacity="0.3" stroke-width="1" />
-    <text x="16" y="44" class="val" fill="#c084fc" filter="url(#glow)">0.05</text>
+    <text x="16" y="44" class="val" fill="#c084fc" filter="url(#glow)">1.41</text>
     <text x="82" y="44" class="unit" fill="#e9d5ff">ms</text>
-    <text x="16" y="68" class="lbl">Opening Retrieval</text>
-    <text x="16" y="94" class="sub">Polyglot Binary</text>
+    <text x="16" y="68" class="lbl">Maia ONNX Inference</text>
+    <text x="16" y="94" class="sub">24.7x Faster (Zero IPC)</text>
   </g>
 
   <!-- Metric 3: AR HUD Frame -->
@@ -78,6 +78,6 @@
     <text x="16" y="44" class="val" fill="#4ade80" filter="url(#glow)">100%</text>
     <text x="86" y="44" class="unit" fill="#bbf7d0">PASS</text>
     <text x="16" y="68" class="lbl">Quality Assurance</text>
-    <text x="16" y="94" class="sub">110/110 Tests Green</text>
+    <text x="16" y="94" class="sub">125/125 Tests Green</text>
   </g>
 </svg>

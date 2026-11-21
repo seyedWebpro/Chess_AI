@@ -14,6 +14,7 @@ import chess
 from loguru import logger
 
 from core.engine_manager import EngineManager
+from core.maia_onnx import MaiaOnnxEngine
 
 
 class Persona(Enum):
@@ -91,6 +92,7 @@ class MaiaEngine:
         engine_manager: Optional[EngineManager] = None,
         persona: Persona = Persona.MAIA_1500,
         onnx_model_path: Optional[Path] = None,
+        use_native_onnx: bool = True,
     ):
         self.engine = engine_manager
         self.owns_engine = False
@@ -100,25 +102,32 @@ class MaiaEngine:
 
         self.persona = persona
         self.onnx_model_path = onnx_model_path
-        self.onnx_session = None
+        self.use_native_onnx = use_native_onnx
+        self.onnx_engine: Optional[MaiaOnnxEngine] = None
 
-        if self.onnx_model_path and self.onnx_model_path.exists():
-            self._load_onnx_model()
+        if self.use_native_onnx:
+            self._init_onnx_engine()
 
-    def _load_onnx_model(self) -> None:
-        try:
-            import onnxruntime as ort
-            self.onnx_session = ort.InferenceSession(str(self.onnx_model_path))
-            logger.success(f"Maia ONNX model loaded from: {self.onnx_model_path}")
-        except Exception as e:
-            logger.warning(f"Could not load ONNX model ({e}). Using calibrated Boltzmann engine fallback.")
-            self.onnx_session = None
+    def _init_onnx_engine(self) -> None:
+        """Initializes native ONNX Maia engine if weights are available."""
+        profile = PERSONA_PROFILES.get(self.persona)
+        if profile and self.persona != Persona.GOD_MODE:
+            try:
+                self.onnx_engine = MaiaOnnxEngine(elo=profile["target_elo"])
+            except Exception as e:
+                logger.warning(f"Native Maia ONNX engine unavailable ({e}), using Boltzmann fallback.")
+                self.onnx_engine = None
 
     def set_persona(self, persona: Persona) -> None:
         """Dynamically switches active playing persona."""
         self.persona = persona
         profile = PERSONA_PROFILES[persona]
         logger.info(f"Switched persona to: {persona.value} (Target Elo: {profile['target_elo']})")
+        if self.use_native_onnx and persona != Persona.GOD_MODE:
+            if self.onnx_engine:
+                self.onnx_engine.set_elo(profile["target_elo"])
+            else:
+                self._init_onnx_engine()
 
     def predict_move(
         self,
@@ -141,6 +150,34 @@ class MaiaEngine:
         profile = PERSONA_PROFILES[self.persona]
         pv_count = profile["top_pv_count"]
         temp = profile["temperature"]
+
+        # Native Maia ONNX Inference Path
+        if self.persona != Persona.GOD_MODE and self.use_native_onnx and self.onnx_engine is not None:
+            try:
+                res = self.onnx_engine.predict(board, temperature=temp)
+                chosen_move = res["best_move"]
+                prob_dict = {c["uci"]: round(c["probability"], 4) for c in res["candidates"]}
+                score_cp = 0
+                if self.engine:
+                    try:
+                        self.engine.set_fen(board.fen())
+                        eval_data = self.engine.evaluate_position(time_limit=min(0.015, time_limit))
+                        score_cp = eval_data.get("score_cp", 0)
+                    except Exception:
+                        pass
+                return {
+                    "move": chosen_move,
+                    "uci": chosen_move.uci() if chosen_move else None,
+                    "persona": self.persona.name,
+                    "score_cp": score_cp,
+                    "is_blunder": False,
+                    "probabilities": prob_dict,
+                    "pv_rank": 1,
+                    "source": f"MAIA_ONNX_{self.onnx_engine.elo}",
+                    "wdl": res.get("wdl"),
+                }
+            except Exception as e:
+                logger.warning(f"Maia ONNX prediction failed ({e}), falling back to Boltzmann engine.")
 
         # Ensure board FEN is set in engine
         self.engine.set_fen(board.fen())

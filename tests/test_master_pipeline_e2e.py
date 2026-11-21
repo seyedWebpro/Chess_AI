@@ -172,7 +172,7 @@ class TestGrandUnifiedPipeline:
             brain.set_opening_book_enabled(False)
             decision2 = brain.decide_move(board_state, time_limit=0.08)
             assert decision2["is_book"] is False
-            assert decision2["source"] == "MAIA_ENGINE"
+            assert decision2["source"] in ("MAIA_ENGINE", "MAIA_ONNX_1500")
 
         # Initialize Master Dashboard
         dashboard = MasterDashboardWindow(mouse_controller=human_mouse, headless=True)

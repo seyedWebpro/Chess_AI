@@ -108,7 +108,7 @@ class TestPhase10HybridBrain:
             brain.set_opening_book_enabled(False)
             res2 = brain.decide_move(board, time_limit=0.10)
             assert res2["is_book"] is False
-            assert res2["source"] == "MAIA_ENGINE"
+            assert res2["source"] in ("MAIA_ENGINE", "MAIA_ONNX_1500")
             assert res2["move"] in board.legal_moves
 
     def test_06_hybrid_brain_god_mode_mate_tactics(self):

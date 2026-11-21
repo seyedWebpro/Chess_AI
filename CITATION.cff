@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If you utilize Chess AI in academic research or software development, please cite this repository."
+authors:
+  - family-names: "SeyedWebpro"
+    given-names: "Developer"
+title: "Chess AI: Autonomous Multi-Modal Intelligence, Real-Time Vision & Biomechanical Automation"
+version: 2.0.0
+date-released: 2026-11-21
+url: "https://github.com/seyedWebpro/Chess_AI"
+repository-code: "https://github.com/seyedWebpro/Chess_AI"
+keywords:
+  - chess-ai
+  - computer-vision
+  - stockfish-19-nnue
+  - maia-chess-onnx
+  - augmented-reality
+  - biomechanics
+  - minimum-jerk-kinematics
+  - anti-cheat-evasion
+license: MIT

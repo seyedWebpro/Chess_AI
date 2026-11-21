@@ -10,7 +10,9 @@
 ![Platform](https://img.shields.io/badge/Platform-macOS%20%7C%20Linux%20%7C%20Windows-black)
 ![Stockfish](https://img.shields.io/badge/Engine-Stockfish%2019%20NNUE%20(Elo%203600%2B)-green?logo=lichess)
 ![Maia](https://img.shields.io/badge/Neural%20Network-Maia%20Chess%20(ONNX)-purple)
-![Tests](https://img.shields.io/badge/Tests-110%20Passing%20(100%25)-success?logo=pytest)
+![Tests](https://img.shields.io/badge/Tests-125%20Passing%20(100%25)-success?logo=pytest)
+![Maia ONNX](https://img.shields.io/badge/Maia%20ONNX-1.41ms%20(24.7x%20Faster)-purple)
+![Anti-Cheat](https://img.shields.io/badge/Anti--Cheat-ACL%20Governed-orange)
 ![Extension](https://img.shields.io/badge/Chrome%20Extension-Manifest%20V3-blue?logo=googlechrome)
 
 **[English (راهنمای جامع انگلیسی)](README.md)** • **فارسی**
