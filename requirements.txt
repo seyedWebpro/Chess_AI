@@ -20,7 +20,7 @@ edge-tts>=6.1.9
 mss>=9.0.1
 
 # Phase 7: DOM Bridge & Local WebSocket Server
-websockets>=13.0
+websockets>=17.4
 
 # Phase 8 & 10: GUI, Transparent AR Overlay & Master Dashboard
 PyQt6>=6.6.0
