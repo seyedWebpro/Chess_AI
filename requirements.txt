@@ -7,7 +7,7 @@ numpy>=1.22.0
 loguru>=0.7.2
 
 # Phase 2 & 4: Computer Vision, ArUco Calibration & AR Overlays
-opencv-python>=4.8.0
+opencv-python>=5.1.0.95
 scikit-image>=0.21.0
 
 # Phase 3: Physical Move & Hand Tracking
