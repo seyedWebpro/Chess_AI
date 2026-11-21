@@ -8,7 +8,7 @@ loguru>=0.7.2
 
 # Phase 2 & 4: Computer Vision, ArUco Calibration & AR Overlays
 opencv-python>=4.8.0
-scikit-image>=0.21.0
+scikit-image>=0.26.0
 
 # Phase 3: Physical Move & Hand Tracking
 mediapipe>=0.10.9
